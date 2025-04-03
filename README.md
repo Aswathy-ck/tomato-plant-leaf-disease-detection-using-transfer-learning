@@ -1,7 +1,8 @@
 # tomato plant leaf disease detection using transfer learning
  It is an website that helps to detect the tomato plant leaf diseases and also can visualize the part which effected by tomato plant leaf and also consists of a chatbot which helps to provide assistance.
 
-These are the images of the website
+These are the images of the website.
+
 This is the Home page
 
 ![Screenshot 2025-03-24 202917](https://github.com/user-attachments/assets/553663d1-a890-4431-bc4d-be377156e6d6)
