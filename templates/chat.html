@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tomato Disease Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgba(0, 0, 0, 0.6);
+            max-width: 600px;
+            margin: 90px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            background: white;
+            background-image: url("{{ url_for('static', filename='WhatsApp Image 2025-03-08 at 20.15.31.jpeg') }}");
+            
+           
+            background-size: cover;
+            
+         
+            
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #000000;
+            text-shadow: 3px 3px 5px rgb(255, 255, 255);
+        }
+        #chat-container {
+            height: 400px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            background: rgb(255, 255, 255);
+            
+            
+        }
+        .message {
+            padding: 10px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .user-message {
+            background-color: #007bff;
+            color: white;
+            align-self: flex-end;
+            text-align: left;
+        }
+        .bot-message {
+            background-color: #28a745;
+            color: white;
+            align-self: flex-start;
+            font-size: 20px;
+        }
+        .error-message {
+            background-color: #dc3545;
+            color: white;
+            text-align: center;
+        }
+        #input-container {
+            display: flex;
+            gap: 10px;
+        }
+        #user-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+        button {
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .navbar {
+            width: 100%;
+            padding: 15px 30px;
+            background-color: #0c0c0c;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.5rem;
+            margin-left: 10px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="nav-links">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('about') }}">About</a>
+        </div>
+    </div>
+    
+    <h1>Tomato Disease Assistant</h1>
+    <div id="chat-container"></div>
+    <div id="input-container">
+        <input type="text" id="user-input" placeholder="Ask about tomato diseases...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        const sessionId = Math.random().toString(36).substring(2, 15);
+
+        function addMessage(message, sender) {
+            const chatContainer = document.getElementById('chat-container');
+            const messageElement = document.createElement('div');
+            messageElement.className = 'message ' + sender + '-message';
+            messageElement.innerText = message;
+            chatContainer.appendChild(messageElement);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function sendMessage() {
+            const userInput = document.getElementById('user-input');
+            const message = userInput.value.trim();
+            
+            if (message) {
+                addMessage(message, 'user');
+                fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message, session_id: sessionId })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.response) {
+                        addMessage(data.response, 'bot');
+                    } else {
+                        addMessage('Received empty response from server', 'error');
+                    }
+                })
+                .catch(() => {
+                    addMessage('Error processing your request. Try again.', 'error');
+                });
+                
+                userInput.value = '';
+            }
+        }
+
+        document.getElementById('user-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        addMessage('Hello! How can I help with your tomato plants today?', 'bot');
+    </script>
+</body>
+</html>
