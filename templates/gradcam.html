@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grad-CAM Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #9ad097;
+            background-image: url("{{ url_for('static', filename='WhatsApp Image 2025-03-08 at 20.15.31.jpeg') }}");
+
+
+            margin: 0px;
+            padding: 0;
+           
+            background-size: cover;
+            background-position: center;
+         
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .navbar {
+            width: 100%;
+            padding: 15px 30px;
+            background-color: #0c0c0c;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.5rem;
+            margin-left: 10px;
+        }
+
+        .container {
+            margin-top: 110px;
+           
+            padding: 40px;
+            border-radius: 10px;
+            
+            display: inline-block;
+            text-align: center;
+            background-color: rgb(0, 0, 0,0.8);
+          
+            border-radius: 20px;
+            color: rgb(255, 255, 255);
+            max-width: 600px;
+            width: 90%;
+            
+        }
+        img {
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            margin-top: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .chat-toggle-btn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background-color: #2980b9;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px 18px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-toggle-btn:hover {
+            background-color: #1f6693;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-links">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('about') }}">About</a>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Grad-CAM Visualization</h1>
+        <h2>Original Image</h2>
+        <img src="{{ uploaded_image }}" alt="Uploaded Image">
+        
+        <h2>Infected Region Heatmap</h2>
+        <img src="{{ gradcam_image }}" alt="Grad-CAM Heatmap">
+
+        <br>
+        <a href="{{ url_for('index') }}"><button>Back to Home</button></a>
+    </div>
+
+     <!-- Chat Toggle Button -->
+    <form action="{{ url_for('chat', filename=filename) }}" method="GET">
+        <button class="chat-toggle-btn" type="submit">Chat 💬</button>
+    </form>
+
+</body>
+</html>

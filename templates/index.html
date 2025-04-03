@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CropAssist - Tomato Disease Detection</title>
+
+    <style>
+        /* Navbar */
+        .navbar {
+            width: 100%;
+            padding: 15px 30px;
+            background-color: #0c0c0c;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+        h1 {
+            font-size: 4.5rem;
+            color: #ff8d8d;
+            text-shadow: 4px 4px 6px rgb(255, 6, 6);
+            margin-top: 20px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.5rem;
+            margin-left: 10px;
+        }
+
+        /* Page Styling */
+        body {
+            
+            
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("{{ url_for('static', filename='WhatsApp Image 2025-03-08 at 20.15.30.jpeg') }}");
+
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 90px auto;
+        
+
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgb(0, 0, 0,0.8);
+            padding: 40px;
+            border-radius: 20px;
+            color: rgb(255, 255, 255);
+            max-width: 600px;
+            width: 90%;
+            margin-top: 120px;
+           
+           
+        }
+
+        button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            margin: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            height: 50px;
+        }
+
+        button:hover { 
+            background-color: #e60000;
+         }
+
+        /* Image Styling */
+        #uploadedImage {
+            width: 300px;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        .file-upload-form {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        /* Hide Default File Input */
+        input[type="file"] {
+            display: none;
+        }
+
+        /* Custom Choose File Button */
+        .custom-file-upload {
+            background-color: #27ae60;
+            color: white;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .custom-file-upload:hover {
+            background-color: #176236;
+        }
+
+        /* Display File Name */
+        #file-name {
+            font-size: 1rem;
+            color: #ffffff;
+        }
+        .chat-toggle-btn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background-color: #2980b9;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 12px 18px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-toggle-btn:hover {
+            background-color: #1f6693;
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="nav-links">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('about') }}">About</a>
+        </div>
+    </div>
+
+    <section id="home" class="container">
+        <h1>CropAssist</h1>
+        <p style="font-size: 26px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Upload an image of a tomato leaf to detect diseases.</p>
+
+        <!-- Styled File Upload Form -->
+    <form method="POST" enctype="multipart/form-data" class="file-upload-form">
+        <label for="file-input" class="custom-file-upload">Choose File</label>
+        <input type="file" name="file" id="file-input" accept="image/*" required>
+        <span id="file-name">No file chosen</span>
+        <button type="submit" class="upload-btn">Upload</button>
+    </form>
+
+
+
+    
+        {% if uploaded_image %}
+            <h2>Uploaded Image:</h2>
+            <img id="uploadedImage" src="{{ uploaded_image }}" alt="Uploaded Image">
+        {% endif %}
+
+        {% if prediction %}
+            <h2>Prediction:</h2>
+            <p style="font-size: 30px;"><strong>Disease:</strong> {{ prediction }}</p>
+            <p style="font-size: 30px;"><strong>Confidence:</strong> {{ confidence }}%</p>
+            
+            <form action="{{ url_for('gradcam', filename=filename) }}" method="GET">
+                <button type="submit">Check Infected Part (Grad-CAM)</button>
+            </form>
+        {% endif %}
+
+
+    </section>
+     
+    <!-- Chat Toggle Button -->
+    <form action="{{ url_for('chat', filename=filename) }}" method="GET">
+        <button class="chat-toggle-btn" type="submit">Chat 💬</button>
+    </form>
+
+    <script>
+        document.getElementById("file-input").addEventListener("change", function() {
+            var fileName = this.files.length > 0 ? this.files[0].name : "No file chosen";
+            document.getElementById("file-name").innerText = fileName;
+        });
+    </script>
+    
+</body>
+</html>

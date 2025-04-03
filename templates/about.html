@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About CropAssist</title>
+ <style>
+
+    /* General styling */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-image: url("{{ url_for('static', filename='WhatsApp Image 2025-03-08 at 20.15.30.jpeg') }}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff; /* White text for contrast */
+    }
+    .navbar {
+            width: 100%;
+            padding: 15px 30px;
+            background-color: #0c0c0c;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+    }
+   
+    .nav-links a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 1.5rem;
+        margin-left: 10px;
+    }
+    .container {
+        background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+        max-width: 600px;
+        width: 90%;
+    }
+
+    /* Heading styling */
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+        color: #ff4d4d;
+    }
+
+    /* Paragraph styling */
+    p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+
+ </style>
+
+</head>
+<body>
+<div id="navbar-container"></div>
+
+<div class="navbar">
+    <div class="nav-links">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('about') }}">About</a>
+    </div>
+</div>
+<div class="container">
+    <h1>About CropAssist</h1>
+    <p>
+        CropAssist helps farmers and agricultural experts identify and manage tomato plant diseases using AI-based image analysis. 
+        It allows users to upload or capture images of tomato leaves and provides accurate disease identification and recommendations.
+    </p>
+</div>
+
+</body>
+</html>
