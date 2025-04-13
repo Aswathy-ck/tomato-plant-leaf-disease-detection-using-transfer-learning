@@ -25,6 +25,7 @@ This project detects diseases in tomato plant leaves using a deep learning model
 
 
 git clone https://github.com/Aswathy-ck/tomato-plant-leaf-disease-detection-using-transfer-learning.git
+
 cd tomato-plant-leaf-disease-detection-using-transfer-learning
 
 Type this in the terminal (you can use any IDE's for cloning this)
