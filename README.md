@@ -51,7 +51,7 @@ Type this in the terminal (you can use any IDE's for cloning this)
 
 ### 5. Go to http://127.0.0.1:5000
 
-### upload image
+### 6.  upload image
 
 ### These are the images of the website.
 
