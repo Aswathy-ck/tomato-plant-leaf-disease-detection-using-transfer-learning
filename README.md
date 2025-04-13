@@ -32,11 +32,17 @@ Type this in the terminal (you can use any IDE's for cloning this)
 
 ### 2.Install required packages
  -Flask
+ 
  -TensorFlow
+ 
  -Keras
+ 
  -NumPy
- -penCV
+ 
+ -OpenCV
+ 
  -Matplotlib
+ 
  -Pillow
  
 ### 3.Make sure trained model is present(densenet_tomato_leaf_model.h5)
