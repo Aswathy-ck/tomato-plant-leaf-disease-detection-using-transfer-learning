@@ -12,7 +12,7 @@ This project detects diseases in tomato plant leaves using a deep learning model
 
 ### 🛠️ Technologies Used
 
-- Python 3.x
+- Python 3.10
 - Flask
 - TensorFlow / Keras
 - OpenCV
