@@ -1,7 +1,52 @@
-# tomato plant leaf disease detection using transfer learning
- It is an website that helps to detect the tomato plant leaf diseases and also can visualize the part which effected by tomato plant leaf and also consists of a chatbot which helps to provide assistance.
 
-These are the images of the website.
+### 🍅 Tomato Plant Leaf Disease Detection using Transfer Learning
+
+This project detects diseases in tomato plant leaves using a deep learning model (DenseNet121). The web application is built with Flask and allows users to upload a leaf image, which is then classified into one of several tomato plant disease classes. The app also provides a Grad-CAM visualization to show which part of the image influenced the prediction.
+
+### ✨ Features
+
+- Upload tomato leaf images via browser
+- Predict disease using a pre-trained DenseNet121 model
+- Provides visual explanation using Grad-CAM
+- Clean and simple Flask web interface
+
+### 🛠️ Technologies Used
+
+- Python 3.x
+- Flask
+- TensorFlow / Keras
+- OpenCV
+- Grad-CAM
+- HTML, CSS
+
+⚙️ How to Setup and Run Locally
+
+### 1. Clone the Repository
+
+
+git clone https://github.com/Aswathy-ck/tomato-plant-leaf-disease-detection-using-transfer-learning.git
+cd tomato-plant-leaf-disease-detection-using-transfer-learning
+
+Type this in the terminal (you can use any IDE's for cloning this)
+
+### 2.Install required packages
+ -Flask
+ -TensorFlow
+ -Keras
+ -NumPy
+ -penCV
+ -Matplotlib
+ -Pillow
+ 
+### 3.Make sure trained model is present(densenet_tomato_leaf_model.h5)
+
+### 4. Run the app.py
+
+### 5. Go to http://127.0.0.1:5000
+
+### upload image
+
+### These are the images of the website.
 
 This is the Home page
 
